@@ -1,0 +1,1170 @@
+{
+	"info": {
+		"_postman_id": "6b1f5c91-9c39-496c-9f1a-624c692be839",
+		"name": "MS-Person Demographics",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12160861"
+	},
+	"item": [
+		{
+			"name": "Person",
+			"item": [
+				{
+					"name": "DAD with embedded records",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"console.info(`Dad Name: ${pm.iterationData.get(\"DAD_FIRST_NAME\")}`);",
+									"",
+									"if(pm.response.code != 200){",
+									"\tconsole.info(`Terminating collection run for ${pm.iterationData.get(\"LAST_NAME\")} household`);",
+									"\tpostman.setNextRequest(null);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.info(`Creating Persons for household: ${pm.iterationData.get(\"LAST_NAME\")}`);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"data\": {\r\n\t\t\"uniqueID\": \"{{DAD_UNIQUE_ID}}\",\r\n\t\t\"FirstName\": \"{{DAD_FIRST_NAME}}\",\r\n\t\t\"LastName\": \"{{LAST_NAME}}\",\r\n\t\t\"MiddleName\": \"{{TIMESTAMP}}{{ROW}}01\",\r\n\t\t\"DATEOFBIRTHAVAILABLE\": \"Yes\",\r\n\t\t\"DateofBirth\": \"{{DAD_BIRTH_DATE}}\",\r\n\t\t\"DOBVERIFIED\": \"Yes\",\r\n\t\t\"DATEAGEVERIFIED\": \"{{COMMON_START_DATE}}\",\r\n\t\t\"SEXATBIRTH\": \"Male\",\r\n\t\t\"Gender\": \"Male\",\r\n\t\t\"RACE\": \"{{RACE}}\",\r\n\t\t\"ETHNICITYMS\": \"{{ETHNICITY}}\",\r\n\t\t\"SSNVERIFY\": \"{{DAD_SSN}}\",\r\n\t\t\"ISSSNVERIFIED\": \"1\",\r\n\t\t\"CITIZENSHIPSTATUS\": \"{{CITIZENSHIP_STATUS}}\",\r\n\t\t\"MARITALSTATUS\": \"{{MARITAL_STATUS}}\",\r\n\t\t\"DATEMARRIED\": \"{{DATE_MARRIED}}\",\r\n\t\t\"PRIORVIC\": \"No\",\r\n\t\t\"ICWAELIGIBLE\": \"{{ICWAELIGIBLE}}\",\r\n\t\t\"TRIBALEVENTS\": \"{{TRIBALEVENTS}}\",\r\n\t\t\"TRIBALSERVICES\": \"{{TRIBALSERVICES}}\",\r\n\t\t\"TRIBALLAND\": \"{{TRIBALLAND}}\",\r\n\t\t\"MEMBEROFTRIBE\": \"{{MEMBEROFTRIBE}}\",\r\n\t\t\"INDIANCHILDUNDERICWA\": \"{{INDIANCHILDUNDERICWA}}\",\r\n\t\t\"TRIBALAFFILIATION\": \"{{TRIBALAFFILIATION}}\",\r\n\t\t\"testphonenumbers\": [\r\n\t\t\t{\r\n\t\t\t\t\"uniqueID\": \"PN-{{TIMESTAMP}}{{ROW}}01\",\r\n\t\t\t\t\"parentUniqueID\": \"{{DAD_UNIQUE_ID}}\",\r\n\t\t\t\t\"PHONETYPE\": \"{{DAD_PHONE_TYPE}}\",\r\n\t\t\t\t\"SUBTYPE\": \"Primary\",\r\n\t\t\t\t\"PHONENUMBER\": \"{{DAD_PHONE_NUMBER}}\",\r\n\t\t\t\t\"STARTDATE\": \"{{COMMON_START_DATE}}\"\r\n\t\t\t}\r\n\t\t],\r\n\t\t\"testemailaddresses\": [\r\n\t\t\t{\r\n\t\t\t\t\"uniqueID\": \"EA-{{TIMESTAMP}}{{ROW}}01\",\r\n\t\t\t\t\"parentUniqueID\": \"{{DAD_UNIQUE_ID}}\",\r\n\t\t\t\t\"EMAILTYPE\": \"{{DAD_EMAIL_TYPE}}\",\r\n\t\t\t\t\"EMAILADDRESS\": \"{{DAD_EMAIL}}\",\r\n\t\t\t\t\"STARTDATE\": \"{{COMMON_START_DATE}}\"\r\n\t\t\t}\r\n\t\t],\r\n\t\t\"testhealthcareprofessionals\": [\r\n\t\t\t{\r\n\t\t\t\t\"uniqueID\": \"HP-{{TIMESTAMP}}{{ROW}}01\",\r\n\t\t\t\t\"parentUniqueID\": \"{{DAD_UNIQUE_ID}}\",\r\n\t\t\t\t\"HEALTHCAREPROFESSIONALTYPE\": \"{{DAD_HEALTHCARE_PROFESSIONAL_TYPE}}\",\r\n\t\t\t\t\"HEALTHCAREPROFESSIONALNAME\": \"{{$randomFullName}}\",\r\n\t\t\t\t\"STARTDATE\": \"{{COMMON_START_DATE}}\"\r\n\t\t\t}\r\n\t\t],\r\n\t\t\"testmentalhealthprofessionals\": [\r\n\t\t\t{\r\n\t\t\t\t\"uniqueID\": \"MH-{{TIMESTAMP}}{{ROW}}01\",\r\n\t\t\t\t\"parentUniqueID\": \"{{DAD_UNIQUE_ID}}\",\r\n\t\t\t\t\"MENTALHEALTHPROFESSIONALTYPE\": \"{{DAD_MENTAL_HEALTH_PROFESSIONAL_TYPE}}\",\r\n\t\t\t\t\"MENTALHEALTHPROFESSIONALNAME\": \"{{$randomFullName}}\",\r\n\t\t\t\t\"STARTDATE\": \"{{COMMON_START_DATE}}\"\r\n\t\t\t}\r\n\t\t],\r\n\t\t\"testprimaryoptometrists\": [\r\n\t\t\t{\r\n\t\t\t\t\"uniqueID\": \"PO-{{TIMESTAMP}}{{ROW}}01\",\r\n\t\t\t\t\"parentUniqueID\": \"{{DAD_UNIQUE_ID}}\",\r\n\t\t\t\t\"OPTICALPROFTYPE\": \"{{DAD_PRIMARY_OPTOMETRIST_TYPE}}\",\r\n\t\t\t\t\"PRIMARYOPTOMETRISTNAME\": \"{{$randomFullName}}\",\r\n\t\t\t\t\"STARTDATE\": \"{{COMMON_START_DATE}}\"\r\n\t\t\t}\r\n\t\t],\r\n\t\t\"testprimarydentists\": [\r\n\t\t\t{\r\n\t\t\t\t\"uniqueID\": \"PD-{{TIMESTAMP}}{{ROW}}01\",\r\n\t\t\t\t\"parentUniqueID\": \"{{DAD_UNIQUE_ID}}\",\r\n\t\t\t\t\"DENTALPROFESSIONALTYPE\": \"{{DAD_PRIMARY_DENTIST_TYPE}}\",\r\n\t\t\t\t\"PRIMARYDENTISTNAME\": \"{{$randomFullName}}\",\r\n\t\t\t\t\"STARTDATE\": \"{{COMMON_START_DATE}}\"\r\n\t\t\t}\r\n\t\t]\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/entity/api/data/testpersons",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"entity",
+								"api",
+								"data",
+								"testpersons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "MOM with embedded records",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"console.info(`Mom Name: ${pm.iterationData.get(\"MOM_FIRST_NAME\")}`);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"data\": {\r\n\t\t\"uniqueID\": \"{{MOM_UNIQUE_ID}}\",\r\n\t\t\"FirstName\": \"{{MOM_FIRST_NAME}}\",\r\n\t\t\"LastName\": \"{{LAST_NAME}}\",\r\n\t\t\"MiddleName\": \"{{TIMESTAMP}}{{ROW}}02\",\r\n\t\t\"DATEOFBIRTHAVAILABLE\": \"Yes\",\r\n\t\t\"DateofBirth\": \"{{MOM_BIRTH_DATE}}\",\r\n\t\t\"DOBVERIFIED\": \"Yes\",\r\n\t\t\"DATEAGEVERIFIED\": \"{{COMMON_START_DATE}}\",\r\n\t\t\"SEXATBIRTH\": \"Female\",\r\n\t\t\"Gender\": \"Female\",\r\n\t\t\"RACE\": \"{{RACE}}\",\r\n\t\t\"ETHNICITYMS\": \"{{ETHNICITY}}\",\r\n\t\t\"SOCIALSECURITYNUMBER\": \"{{MOM_SSN}}\",\r\n\t\t\"SSNVERIFY\": \"1\",\r\n\t\t\"CITIZENSHIPSTATUS\": \"{{CITIZENSHIP_STATUS}}\",\r\n\t\t\"MARITALSTATUS\": \"{{MARITAL_STATUS}}\",\r\n\t\t\"DATEMARRIED\": \"{{DATE_MARRIED}}\",\r\n\t\t\"PRIORVIC\": \"No\",\r\n\t\t\"ICWAELIGIBLE\": \"{{ICWAELIGIBLE}}\",\r\n\t\t\"TRIBALEVENTS\": \"{{TRIBALEVENTS}}\",\r\n\t\t\"TRIBALSERVICES\": \"{{TRIBALSERVICES}}\",\r\n\t\t\"TRIBALLAND\": \"{{TRIBALLAND}}\",\r\n\t\t\"MEMBEROFTRIBE\": \"{{MEMBEROFTRIBE}}\",\r\n\t\t\"INDIANCHILDUNDERICWA\": \"{{INDIANCHILDUNDERICWA}}\",\r\n\t\t\"TRIBALAFFILIATION\": \"{{TRIBALAFFILIATION}}\",\r\n\t\t\"testphonenumbers\": [\r\n\t\t\t{\r\n\t\t\t\t\"uniqueID\": \"PN-{{TIMESTAMP}}{{ROW}}02\",\r\n\t\t\t\t\"parentUniqueID\": \"{{MOM_UNIQUE_ID}}\",\r\n\t\t\t\t\"PHONETYPE\": \"{{MOM_PHONE_TYPE}}\",\r\n\t\t\t\t\"SUBTYPE\": \"Primary\",\r\n\t\t\t\t\"PHONENUMBER\": \"{{MOM_PHONE_NUMBER}}\",\r\n\t\t\t\t\"STARTDATE\": \"{{COMMON_START_DATE}}\"\r\n\t\t\t}\r\n\t\t],\r\n\t\t\"testemailaddresses\": [\r\n\t\t\t{\r\n\t\t\t\t\"uniqueID\": \"EA-{{TIMESTAMP}}{{ROW}}02\",\r\n\t\t\t\t\"parentUniqueID\": \"{{MOM_UNIQUE_ID}}\",\r\n\t\t\t\t\"EMAILTYPE\": \"{{MOM_EMAIL_TYPE}}\",\r\n\t\t\t\t\"EMAILADDRESS\": \"{{MOM_EMAIL}}\",\r\n\t\t\t\t\"STARTDATE\": \"{{COMMON_START_DATE}}\"\r\n\t\t\t}\r\n\t\t],\r\n\t\t\"testhealthcareprofessionals\": [\r\n\t\t\t{\r\n\t\t\t\t\"uniqueID\": \"HP-{{TIMESTAMP}}{{ROW}}02\",\r\n\t\t\t\t\"parentUniqueID\": \"{{MOM_UNIQUE_ID}}\",\r\n\t\t\t\t\"HEALTHCAREPROFESSIONALTYPE\": \"{{MOM_HEALTHCARE_PROFESSIONAL_TYPE}}\",\r\n\t\t\t\t\"HEALTHCAREPROFESSIONALNAME\": \"{{$randomFullName}}\",\r\n\t\t\t\t\"STARTDATE\": \"{{COMMON_START_DATE}}\"\r\n\t\t\t}\r\n\t\t],\r\n\t\t\"testmentalhealthprofessionals\": [\r\n\t\t\t{\r\n\t\t\t\t\"uniqueID\": \"MH-{{TIMESTAMP}}{{ROW}}02\",\r\n\t\t\t\t\"parentUniqueID\": \"{{MOM_UNIQUE_ID}}\",\r\n\t\t\t\t\"MENTALHEALTHPROFESSIONALTYPE\": \"{{MOM_MENTAL_HEALTH_PROFESSIONAL_TYPE}}\",\r\n\t\t\t\t\"MENTALHEALTHPROFESSIONALNAME\": \"{{$randomFullName}}\",\r\n\t\t\t\t\"STARTDATE\": \"{{COMMON_START_DATE}}\"\r\n\t\t\t}\r\n\t\t],\r\n\t\t\"testprimaryoptometrists\": [\r\n\t\t\t{\r\n\t\t\t\t\"uniqueID\": \"PO-{{TIMESTAMP}}{{ROW}}02\",\r\n\t\t\t\t\"parentUniqueID\": \"{{MOM_UNIQUE_ID}}\",\r\n\t\t\t\t\"OPTICALPROFTYPE\": \"{{MOM_PRIMARY_OPTOMETRIST_TYPE}}\",\r\n\t\t\t\t\"PRIMARYOPTOMETRISTNAME\": \"{{$randomFullName}}\",\r\n\t\t\t\t\"STARTDATE\": \"{{COMMON_START_DATE}}\"\r\n\t\t\t}\r\n\t\t],\r\n\t\t\"testprimarydentists\": [\r\n\t\t\t{\r\n\t\t\t\t\"uniqueID\": \"PD-{{TIMESTAMP}}{{ROW}}02\",\r\n\t\t\t\t\"parentUniqueID\": \"{{MOM_UNIQUE_ID}}\",\r\n\t\t\t\t\"DENTALPROFESSIONALTYPE\": \"{{MOM_PRIMARY_DENTIST_TYPE}}\",\r\n\t\t\t\t\"PRIMARYDENTISTNAME\": \"{{$randomFullName}}\",\r\n\t\t\t\t\"STARTDATE\": \"{{COMMON_START_DATE}}\"\r\n\t\t\t}\r\n\t\t]\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/entity/api/data/testpersons",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"entity",
+								"api",
+								"data",
+								"testpersons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GRAND_MOM with embedded records",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"console.info(`Mom Name: ${pm.iterationData.get(\"GRAND_MOM_FIRST_NAME\")}`);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"data\": {\r\n\t\t\"uniqueID\": \"{{GRAND_MOM_UNIQUE_ID}}\",\r\n\t\t\"FirstName\": \"{{GRAND_MOM_FIRST_NAME}}\",\r\n\t\t\"LastName\": \"{{LAST_NAME}}\",\r\n\t\t\"MiddleName\": \"{{TIMESTAMP}}{{ROW}}03\",\r\n\t\t\"DATEOFBIRTHAVAILABLE\": \"Yes\",\r\n\t\t\"DateofBirth\": \"{{GRAND_MOM_BIRTH_DATE}}\",\r\n\t\t\"DOBVERIFIED\": \"Yes\",\r\n\t\t\"DATEAGEVERIFIED\": \"{{COMMON_START_DATE}}\",\r\n\t\t\"SEXATBIRTH\": \"Female\",\r\n\t\t\"Gender\": \"Female\",\r\n\t\t\"RACE\": \"{{RACE}}\",\r\n\t\t\"ETHNICITYMS\": \"{{ETHNICITY}}\",\r\n\t\t\"SOCIALSECURITYNUMBER\": \"{{GRAND_MOM_SSN}}\",\r\n\t\t\"SSNVERIFY\": \"1\",\r\n\t\t\"CITIZENSHIPSTATUS\": \"{{CITIZENSHIP_STATUS}}\",\r\n\t\t\"MARITALSTATUS\": \"{{MARITAL_STATUS}}\",\r\n\t\t\"DATEMARRIED\": \"{{DATE_MARRIED}}\",\r\n\t\t\"PRIORVIC\": \"No\",\r\n\t\t\"ICWAELIGIBLE\": \"{{ICWAELIGIBLE}}\",\r\n\t\t\"TRIBALEVENTS\": \"{{TRIBALEVENTS}}\",\r\n\t\t\"TRIBALSERVICES\": \"{{TRIBALSERVICES}}\",\r\n\t\t\"TRIBALLAND\": \"{{TRIBALLAND}}\",\r\n\t\t\"MEMBEROFTRIBE\": \"{{MEMBEROFTRIBE}}\",\r\n\t\t\"INDIANCHILDUNDERICWA\": \"{{INDIANCHILDUNDERICWA}}\",\r\n\t\t\"TRIBALAFFILIATION\": \"{{TRIBALAFFILIATION}}\",\r\n\t\t\"testphonenumbers\": [\r\n\t\t\t{\r\n\t\t\t\t\"uniqueID\": \"PN-{{TIMESTAMP}}{{ROW}}03\",\r\n\t\t\t\t\"parentUniqueID\": \"{{GRAND_MOM_UNIQUE_ID}}\",\r\n\t\t\t\t\"PHONETYPE\": \"{{GRAND_MOM_PHONE_TYPE}}\",\r\n\t\t\t\t\"SUBTYPE\": \"Primary\",\r\n\t\t\t\t\"PHONENUMBER\": \"{{GRAND_MOM_PHONE_NUMBER}}\",\r\n\t\t\t\t\"STARTDATE\": \"{{COMMON_START_DATE}}\"\r\n\t\t\t}\r\n\t\t],\r\n\t\t\"testemailaddresses\": [\r\n\t\t\t{\r\n\t\t\t\t\"uniqueID\": \"EA-{{TIMESTAMP}}{{ROW}}03\",\r\n\t\t\t\t\"parentUniqueID\": \"{{GRAND_MOM_UNIQUE_ID}}\",\r\n\t\t\t\t\"EMAILTYPE\": \"{{GRAND_MOM_EMAIL_TYPE}}\",\r\n\t\t\t\t\"EMAILADDRESS\": \"{{GRAND_MOM_EMAIL}}\",\r\n\t\t\t\t\"STARTDATE\": \"{{COMMON_START_DATE}}\"\r\n\t\t\t}\r\n\t\t],\r\n\t\t\"testhealthcareprofessionals\": [\r\n\t\t\t{\r\n\t\t\t\t\"uniqueID\": \"HP-{{TIMESTAMP}}{{ROW}}03\",\r\n\t\t\t\t\"parentUniqueID\": \"{{GRAND_MOM_UNIQUE_ID}}\",\r\n\t\t\t\t\"HEALTHCAREPROFESSIONALTYPE\": \"{{GRAND_MOM_HEALTHCARE_PROFESSIONAL_TYPE}}\",\r\n\t\t\t\t\"HEALTHCAREPROFESSIONALNAME\": \"{{$randomFullName}}\",\r\n\t\t\t\t\"STARTDATE\": \"{{COMMON_START_DATE}}\"\r\n\t\t\t}\r\n\t\t],\r\n\t\t\"testmentalhealthprofessionals\": [\r\n\t\t\t{\r\n\t\t\t\t\"uniqueID\": \"MH-{{TIMESTAMP}}{{ROW}}03\",\r\n\t\t\t\t\"parentUniqueID\": \"{{GRAND_MOM_UNIQUE_ID}}\",\r\n\t\t\t\t\"MENTALHEALTHPROFESSIONALTYPE\": \"{{GRAND_MOM_MENTAL_HEALTH_PROFESSIONAL_TYPE}}\",\r\n\t\t\t\t\"MENTALHEALTHPROFESSIONALNAME\": \"{{$randomFullName}}\",\r\n\t\t\t\t\"STARTDATE\": \"{{COMMON_START_DATE}}\"\r\n\t\t\t}\r\n\t\t],\r\n\t\t\"testprimaryoptometrists\": [\r\n\t\t\t{\r\n\t\t\t\t\"uniqueID\": \"PO-{{TIMESTAMP}}{{ROW}}03\",\r\n\t\t\t\t\"parentUniqueID\": \"{{GRAND_MOM_UNIQUE_ID}}\",\r\n\t\t\t\t\"OPTICALPROFTYPE\": \"{{GRAND_MOM_PRIMARY_OPTOMETRIST_TYPE}}\",\r\n\t\t\t\t\"PRIMARYOPTOMETRISTNAME\": \"{{$randomFullName}}\",\r\n\t\t\t\t\"STARTDATE\": \"{{COMMON_START_DATE}}\"\r\n\t\t\t}\r\n\t\t],\r\n\t\t\"testprimarydentists\": [\r\n\t\t\t{\r\n\t\t\t\t\"uniqueID\": \"PD-{{TIMESTAMP}}{{ROW}}03\",\r\n\t\t\t\t\"parentUniqueID\": \"{{GRAND_MOM_UNIQUE_ID}}\",\r\n\t\t\t\t\"DENTALPROFESSIONALTYPE\": \"{{GRAND_MOM_PRIMARY_DENTIST_TYPE}}\",\r\n\t\t\t\t\"PRIMARYDENTISTNAME\": \"{{$randomFullName}}\",\r\n\t\t\t\t\"STARTDATE\": \"{{COMMON_START_DATE}}\"\r\n\t\t\t}\r\n\t\t]\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/entity/api/data/testpersons",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"entity",
+								"api",
+								"data",
+								"testpersons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "NEGLECT_F with embedded records",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"console.info(`Daughter Name: ${pm.iterationData.get(\"NEGLECT_F_CHILD1_FIRST_NAME\")}`);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"data\": {\r\n\t\t\"uniqueID\": \"{{NEGLECT_F_CHILD1_UNIQUE_ID}}\",\r\n\t\t\"FirstName\": \"{{NEGLECT_F_CHILD1_FIRST_NAME}}\",\r\n\t\t\"LastName\": \"{{LAST_NAME}}\",\r\n\t\t\"MiddleName\": \"{{TIMESTAMP}}{{ROW}}04\",\r\n\t\t\"DATEOFBIRTHAVAILABLE\": \"Yes\",\r\n\t\t\"DateofBirth\": \"{{NEGLECT_F_CHILD1_BIRTH_DATE}}\",\r\n\t\t\"DOBVERIFIED\": \"Yes\",\r\n\t\t\"DATEAGEVERIFIED\": \"{{COMMON_START_DATE}}\",\r\n\t\t\"SEXATBIRTH\": \"Female\",\r\n\t\t\"Gender\": \"Female\",\r\n\t\t\"RACE\": \"{{RACE}}\",\r\n\t\t\"ETHNICITYMS\": \"{{ETHNICITY}}\",\r\n\t\t\"SOCIALSECURITYNUMBER\": \"{{NEGLECT_F_CHILD1_SSN}}\",\r\n\t\t\"SSNVERIFY\": \"1\",\r\n\t\t\"CITIZENSHIPSTATUS\": \"{{CITIZENSHIP_STATUS}}\",\r\n\t\t\"MARITALSTATUS\": \"{{MARITAL_STATUS}}\",\r\n\t\t\"DATEMARRIED\": \"{{DATE_MARRIED}}\",\r\n\t\t\"PRIORVIC\": \"No\",\r\n\t\t\"ICWAELIGIBLE\": \"{{ICWAELIGIBLE}}\",\r\n\t\t\"TRIBALEVENTS\": \"{{TRIBALEVENTS}}\",\r\n\t\t\"TRIBALSERVICES\": \"{{TRIBALSERVICES}}\",\r\n\t\t\"TRIBALLAND\": \"{{TRIBALLAND}}\",\r\n\t\t\"MEMBEROFTRIBE\": \"{{MEMBEROFTRIBE}}\",\r\n\t\t\"INDIANCHILDUNDERICWA\": \"{{INDIANCHILDUNDERICWA}}\",\r\n\t\t\"TRIBALAFFILIATION\": \"{{TRIBALAFFILIATION}}\",\r\n\t\t\"ICWAAPPLIES\": \"{{ICWAAPPLIES}}\",\r\n\t\t\"testphonenumbers\": [\r\n\t\t\t{\r\n\t\t\t\t\"uniqueID\": \"PN-{{TIMESTAMP}}{{ROW}}04\",\r\n\t\t\t\t\"parentUniqueID\": \"{{NEGLECT_F_CHILD1_UNIQUE_ID}}\",\r\n\t\t\t\t\"PHONETYPE\": \"{{NEGLECT_F_CHILD1_PHONE_TYPE}}\",\r\n\t\t\t\t\"SUBTYPE\": \"Primary\",\r\n\t\t\t\t\"PHONENUMBER\": \"{{NEGLECT_F_CHILD1_PHONE_NUMBER}}\",\r\n\t\t\t\t\"STARTDATE\": \"{{COMMON_START_DATE}}\"\r\n\t\t\t}\r\n\t\t],\r\n\t\t\"testemailaddresses\": [\r\n\t\t\t{\r\n\t\t\t\t\"uniqueID\": \"EA-{{TIMESTAMP}}{{ROW}}04\",\r\n\t\t\t\t\"parentUniqueID\": \"{{NEGLECT_F_CHILD1_UNIQUE_ID}}\",\r\n\t\t\t\t\"EMAILTYPE\": \"{{NEGLECT_F_CHILD1_EMAIL_TYPE}}\",\r\n\t\t\t\t\"EMAILADDRESS\": \"{{NEGLECT_F_CHILD1_EMAIL}}\",\r\n\t\t\t\t\"STARTDATE\": \"{{COMMON_START_DATE}}\"\r\n\t\t\t}\r\n\t\t],\r\n\t\t\"testhealthcareprofessionals\": [\r\n\t\t\t{\r\n\t\t\t\t\"uniqueID\": \"HP-{{TIMESTAMP}}{{ROW}}04\",\r\n\t\t\t\t\"parentUniqueID\": \"{{NEGLECT_F_CHILD1_UNIQUE_ID}}\",\r\n\t\t\t\t\"HEALTHCAREPROFESSIONALTYPE\": \"{{NEGLECT_F_CHILD1_HEALTHCARE_PROFESSIONAL_TYPE}}\",\r\n\t\t\t\t\"HEALTHCAREPROFESSIONALNAME\": \"{{$randomFullName}}\",\r\n\t\t\t\t\"STARTDATE\": \"{{COMMON_START_DATE}}\"\r\n\t\t\t}\r\n\t\t],\r\n\t\t\"testmentalhealthprofessionals\": [\r\n\t\t\t{\r\n\t\t\t\t\"uniqueID\": \"MH-{{TIMESTAMP}}{{ROW}}04\",\r\n\t\t\t\t\"parentUniqueID\": \"{{NEGLECT_F_CHILD1_UNIQUE_ID}}\",\r\n\t\t\t\t\"MENTALHEALTHPROFESSIONALTYPE\": \"{{NEGLECT_F_CHILD1_MENTAL_HEALTH_PROFESSIONAL_TYPE}}\",\r\n\t\t\t\t\"MENTALHEALTHPROFESSIONALNAME\": \"{{$randomFullName}}\",\r\n\t\t\t\t\"STARTDATE\": \"{{COMMON_START_DATE}}\"\r\n\t\t\t}\r\n\t\t],\r\n\t\t\"testprimaryoptometrists\": [\r\n\t\t\t{\r\n\t\t\t\t\"uniqueID\": \"PO-{{TIMESTAMP}}{{ROW}}04\",\r\n\t\t\t\t\"parentUniqueID\": \"{{NEGLECT_F_CHILD1_UNIQUE_ID}}\",\r\n\t\t\t\t\"OPTICALPROFTYPE\": \"{{NEGLECT_F_CHILD1_PRIMARY_OPTOMETRIST_TYPE}}\",\r\n\t\t\t\t\"PRIMARYOPTOMETRISTNAME\": \"{{$randomFullName}}\",\r\n\t\t\t\t\"STARTDATE\": \"{{COMMON_START_DATE}}\"\r\n\t\t\t}\r\n\t\t],\r\n\t\t\"testprimarydentists\": [\r\n\t\t\t{\r\n\t\t\t\t\"uniqueID\": \"PD-{{TIMESTAMP}}{{ROW}}04\",\r\n\t\t\t\t\"parentUniqueID\": \"{{NEGLECT_F_CHILD1_UNIQUE_ID}}\",\r\n\t\t\t\t\"DENTALPROFESSIONALTYPE\": \"{{NEGLECT_F_CHILD1_PRIMARY_DENTIST_TYPE}}\",\r\n\t\t\t\t\"PRIMARYDENTISTNAME\": \"{{$randomFullName}}\",\r\n\t\t\t\t\"STARTDATE\": \"{{COMMON_START_DATE}}\"\r\n\t\t\t}\r\n\t\t]\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/entity/api/data/testpersons",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"entity",
+								"api",
+								"data",
+								"testpersons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ABUSE_F with embedded records",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"console.info(`Daughter Name: ${pm.iterationData.get(\"ABUSE_F_CHILD2_FIRST_NAME\")}`);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"data\": {\r\n\t\t\"uniqueID\": \"{{ABUSE_F_CHILD2_UNIQUE_ID}}\",\r\n\t\t\"FirstName\": \"{{ABUSE_F_CHILD2_FIRST_NAME}}\",\r\n\t\t\"LastName\": \"{{LAST_NAME}}\",\r\n\t\t\"MiddleName\": \"{{TIMESTAMP}}{{ROW}}05\",\r\n\t\t\"DATEOFBIRTHAVAILABLE\": \"Yes\",\r\n\t\t\"DateofBirth\": \"{{ABUSE_F_CHILD2_BIRTH_DATE}}\",\r\n\t\t\"DOBVERIFIED\": \"Yes\",\r\n\t\t\"DATEAGEVERIFIED\": \"{{COMMON_START_DATE}}\",\r\n\t\t\"SEXATBIRTH\": \"Female\",\r\n\t\t\"Gender\": \"Female\",\r\n\t\t\"RACE\": \"{{RACE}}\",\r\n\t\t\"ETHNICITYMS\": \"{{ETHNICITY}}\",\r\n\t\t\"SOCIALSECURITYNUMBER\": \"{{ABUSE_F_CHILD2_SSN}}\",\r\n\t\t\"SSNVERIFY\": \"1\",\r\n\t\t\"CITIZENSHIPSTATUS\": \"{{CITIZENSHIP_STATUS}}\",\r\n\t\t\"MARITALSTATUS\": \"{{MARITAL_STATUS}}\",\r\n\t\t\"DATEMARRIED\": \"{{DATE_MARRIED}}\",\r\n\t\t\"PRIORVIC\": \"No\",\r\n\t\t\"ICWAELIGIBLE\": \"{{ICWAELIGIBLE}}\",\r\n\t\t\"TRIBALEVENTS\": \"{{TRIBALEVENTS}}\",\r\n\t\t\"TRIBALSERVICES\": \"{{TRIBALSERVICES}}\",\r\n\t\t\"TRIBALLAND\": \"{{TRIBALLAND}}\",\r\n\t\t\"MEMBEROFTRIBE\": \"{{MEMBEROFTRIBE}}\",\r\n\t\t\"INDIANCHILDUNDERICWA\": \"{{INDIANCHILDUNDERICWA}}\",\r\n\t\t\"TRIBALAFFILIATION\": \"{{TRIBALAFFILIATION}}\",\r\n\t\t\"ICWAAPPLIES\": \"{{ICWAAPPLIES}}\",\r\n\t\t\"testphonenumbers\": [\r\n\t\t\t{\r\n\t\t\t\t\"uniqueID\": \"PN-{{TIMESTAMP}}{{ROW}}05\",\r\n\t\t\t\t\"parentUniqueID\": \"{{ABUSE_F_CHILD2_UNIQUE_ID}}\",\r\n\t\t\t\t\"PHONETYPE\": \"{{ABUSE_F_CHILD2_PHONE_TYPE}}\",\r\n\t\t\t\t\"SUBTYPE\": \"Primary\",\r\n\t\t\t\t\"PHONENUMBER\": \"{{ABUSE_F_CHILD2_PHONE_NUMBER}}\",\r\n\t\t\t\t\"STARTDATE\": \"{{COMMON_START_DATE}}\"\r\n\t\t\t}\r\n\t\t],\r\n\t\t\"testemailaddresses\": [\r\n\t\t\t{\r\n\t\t\t\t\"uniqueID\": \"EA-{{TIMESTAMP}}{{ROW}}05\",\r\n\t\t\t\t\"parentUniqueID\": \"{{ABUSE_F_CHILD2_UNIQUE_ID}}\",\r\n\t\t\t\t\"EMAILTYPE\": \"{{ABUSE_F_CHILD2_EMAIL_TYPE}}\",\r\n\t\t\t\t\"EMAILADDRESS\": \"{{ABUSE_F_CHILD2_EMAIL}}\",\r\n\t\t\t\t\"STARTDATE\": \"{{COMMON_START_DATE}}\"\r\n\t\t\t}\r\n\t\t],\r\n\t\t\"testhealthcareprofessionals\": [\r\n\t\t\t{\r\n\t\t\t\t\"uniqueID\": \"HP-{{TIMESTAMP}}{{ROW}}05\",\r\n\t\t\t\t\"parentUniqueID\": \"{{ABUSE_F_CHILD2_UNIQUE_ID}}\",\r\n\t\t\t\t\"HEALTHCAREPROFESSIONALTYPE\": \"{{ABUSE_F_CHILD2_HEALTHCARE_PROFESSIONAL_TYPE}}\",\r\n\t\t\t\t\"HEALTHCAREPROFESSIONALNAME\": \"{{$randomFullName}}\",\r\n\t\t\t\t\"STARTDATE\": \"{{COMMON_START_DATE}}\"\r\n\t\t\t}\r\n\t\t],\r\n\t\t\"testmentalhealthprofessionals\": [\r\n\t\t\t{\r\n\t\t\t\t\"uniqueID\": \"MH-{{TIMESTAMP}}{{ROW}}05\",\r\n\t\t\t\t\"parentUniqueID\": \"{{ABUSE_F_CHILD2_UNIQUE_ID}}\",\r\n\t\t\t\t\"MENTALHEALTHPROFESSIONALTYPE\": \"{{ABUSE_F_CHILD2_MENTAL_HEALTH_PROFESSIONAL_TYPE}}\",\r\n\t\t\t\t\"MENTALHEALTHPROFESSIONALNAME\": \"{{$randomFullName}}\",\r\n\t\t\t\t\"STARTDATE\": \"{{COMMON_START_DATE}}\"\r\n\t\t\t}\r\n\t\t],\r\n\t\t\"testprimaryoptometrists\": [\r\n\t\t\t{\r\n\t\t\t\t\"uniqueID\": \"PO-{{TIMESTAMP}}{{ROW}}05\",\r\n\t\t\t\t\"parentUniqueID\": \"{{ABUSE_F_CHILD2_UNIQUE_ID}}\",\r\n\t\t\t\t\"OPTICALPROFTYPE\": \"{{ABUSE_F_CHILD2_PRIMARY_OPTOMETRIST_TYPE}}\",\r\n\t\t\t\t\"PRIMARYOPTOMETRISTNAME\": \"{{$randomFullName}}\",\r\n\t\t\t\t\"STARTDATE\": \"{{COMMON_START_DATE}}\"\r\n\t\t\t}\r\n\t\t],\r\n\t\t\"testprimarydentists\": [\r\n\t\t\t{\r\n\t\t\t\t\"uniqueID\": \"PD-{{TIMESTAMP}}{{ROW}}05\",\r\n\t\t\t\t\"parentUniqueID\": \"{{ABUSE_F_CHILD2_UNIQUE_ID}}\",\r\n\t\t\t\t\"DENTALPROFESSIONALTYPE\": \"{{ABUSE_F_CHILD2_PRIMARY_DENTIST_TYPE}}\",\r\n\t\t\t\t\"PRIMARYDENTISTNAME\": \"{{$randomFullName}}\",\r\n\t\t\t\t\"STARTDATE\": \"{{COMMON_START_DATE}}\"\r\n\t\t\t}\r\n\t\t]\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/entity/api/data/testpersons",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"entity",
+								"api",
+								"data",
+								"testpersons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "NEGLECT_M with embedded records",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"console.info(`Son Name: ${pm.iterationData.get(\"NEGLECT_M_CHILD3_FIRST_NAME\")}`);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"data\": {\r\n\t\t\"uniqueID\": \"{{NEGLECT_M_CHILD3_UNIQUE_ID}}\",\r\n\t\t\"FirstName\": \"{{NEGLECT_M_CHILD3_FIRST_NAME}}\",\r\n\t\t\"LastName\": \"{{LAST_NAME}}\",\r\n\t\t\"MiddleName\": \"{{TIMESTAMP}}{{ROW}}06\",\r\n\t\t\"DATEOFBIRTHAVAILABLE\": \"Yes\",\r\n\t\t\"DateofBirth\": \"{{NEGLECT_M_CHILD3_BIRTH_DATE}}\",\r\n\t\t\"DOBVERIFIED\": \"Yes\",\r\n\t\t\"DATEAGEVERIFIED\": \"{{COMMON_START_DATE}}\",\r\n\t\t\"SEXATBIRTH\": \"Male\",\r\n\t\t\"Gender\": \"Male\",\r\n\t\t\"RACE\": \"{{RACE}}\",\r\n\t\t\"ETHNICITYMS\": \"{{ETHNICITY}}\",\r\n\t\t\"SOCIALSECURITYNUMBER\": \"{{NEGLECT_M_CHILD3_SSN}}\",\r\n\t\t\"SSNVERIFY\": \"1\",\r\n\t\t\"CITIZENSHIPSTATUS\": \"{{CITIZENSHIP_STATUS}}\",\r\n\t\t\"MARITALSTATUS\": \"{{MARITAL_STATUS}}\",\r\n\t\t\"DATEMARRIED\": \"{{DATE_MARRIED}}\",\r\n\t\t\"PRIORVIC\": \"No\",\r\n\t\t\"ICWAELIGIBLE\": \"{{ICWAELIGIBLE}}\",\r\n\t\t\"TRIBALEVENTS\": \"{{TRIBALEVENTS}}\",\r\n\t\t\"TRIBALSERVICES\": \"{{TRIBALSERVICES}}\",\r\n\t\t\"TRIBALLAND\": \"{{TRIBALLAND}}\",\r\n\t\t\"MEMBEROFTRIBE\": \"{{MEMBEROFTRIBE}}\",\r\n\t\t\"INDIANCHILDUNDERICWA\": \"{{INDIANCHILDUNDERICWA}}\",\r\n\t\t\"TRIBALAFFILIATION\": \"{{TRIBALAFFILIATION}}\",\r\n\t\t\"ICWAAPPLIES\": \"{{ICWAAPPLIES}}\",\r\n\t\t\"testphonenumbers\": [\r\n\t\t\t{\r\n\t\t\t\t\"uniqueID\": \"PN-{{TIMESTAMP}}{{ROW}}06\",\r\n\t\t\t\t\"parentUniqueID\": \"{{NEGLECT_M_CHILD3_UNIQUE_ID}}\",\r\n\t\t\t\t\"PHONETYPE\": \"{{NEGLECT_M_CHILD3_PHONE_TYPE}}\",\r\n\t\t\t\t\"SUBTYPE\": \"Primary\",\r\n\t\t\t\t\"PHONENUMBER\": \"{{NEGLECT_M_CHILD3_PHONE_NUMBER}}\",\r\n\t\t\t\t\"STARTDATE\": \"{{COMMON_START_DATE}}\"\r\n\t\t\t}\r\n\t\t],\r\n\t\t\"testemailaddresses\": [\r\n\t\t\t{\r\n\t\t\t\t\"uniqueID\": \"EA-{{TIMESTAMP}}{{ROW}}06\",\r\n\t\t\t\t\"parentUniqueID\": \"{{NEGLECT_M_CHILD3_UNIQUE_ID}}\",\r\n\t\t\t\t\"EMAILTYPE\": \"{{NEGLECT_M_CHILD3_EMAIL_TYPE}}\",\r\n\t\t\t\t\"EMAILADDRESS\": \"{{NEGLECT_M_CHILD3_EMAIL}}\",\r\n\t\t\t\t\"STARTDATE\": \"{{COMMON_START_DATE}}\"\r\n\t\t\t}\r\n\t\t],\r\n\t\t\"testhealthcareprofessionals\": [\r\n\t\t\t{\r\n\t\t\t\t\"uniqueID\": \"HP-{{TIMESTAMP}}{{ROW}}06\",\r\n\t\t\t\t\"parentUniqueID\": \"{{NEGLECT_M_CHILD3_UNIQUE_ID}}\",\r\n\t\t\t\t\"HEALTHCAREPROFESSIONALTYPE\": \"{{NEGLECT_M_CHILD3_HEALTHCARE_PROFESSIONAL_TYPE}}\",\r\n\t\t\t\t\"HEALTHCAREPROFESSIONALNAME\": \"{{$randomFullName}}\",\r\n\t\t\t\t\"STARTDATE\": \"{{COMMON_START_DATE}}\"\r\n\t\t\t}\r\n\t\t],\r\n\t\t\"testmentalhealthprofessionals\": [\r\n\t\t\t{\r\n\t\t\t\t\"uniqueID\": \"MH-{{TIMESTAMP}}{{ROW}}06\",\r\n\t\t\t\t\"parentUniqueID\": \"{{NEGLECT_M_CHILD3_UNIQUE_ID}}\",\r\n\t\t\t\t\"MENTALHEALTHPROFESSIONALTYPE\": \"{{NEGLECT_M_CHILD3_MENTAL_HEALTH_PROFESSIONAL_TYPE}}\",\r\n\t\t\t\t\"MENTALHEALTHPROFESSIONALNAME\": \"{{$randomFullName}}\",\r\n\t\t\t\t\"STARTDATE\": \"{{COMMON_START_DATE}}\"\r\n\t\t\t}\r\n\t\t],\r\n\t\t\"testprimaryoptometrists\": [\r\n\t\t\t{\r\n\t\t\t\t\"uniqueID\": \"PO-{{TIMESTAMP}}{{ROW}}06\",\r\n\t\t\t\t\"parentUniqueID\": \"{{NEGLECT_M_CHILD3_UNIQUE_ID}}\",\r\n\t\t\t\t\"OPTICALPROFTYPE\": \"{{NEGLECT_M_CHILD3_PRIMARY_OPTOMETRIST_TYPE}}\",\r\n\t\t\t\t\"PRIMARYOPTOMETRISTNAME\": \"{{$randomFullName}}\",\r\n\t\t\t\t\"STARTDATE\": \"{{COMMON_START_DATE}}\"\r\n\t\t\t}\r\n\t\t],\r\n\t\t\"testprimarydentists\": [\r\n\t\t\t{\r\n\t\t\t\t\"uniqueID\": \"PD-{{TIMESTAMP}}{{ROW}}06\",\r\n\t\t\t\t\"parentUniqueID\": \"{{NEGLECT_M_CHILD3_UNIQUE_ID}}\",\r\n\t\t\t\t\"DENTALPROFESSIONALTYPE\": \"{{NEGLECT_M_CHILD3_PRIMARY_DENTIST_TYPE}}\",\r\n\t\t\t\t\"PRIMARYDENTISTNAME\": \"{{$randomFullName}}\",\r\n\t\t\t\t\"STARTDATE\": \"{{COMMON_START_DATE}}\"\r\n\t\t\t}\r\n\t\t]\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/entity/api/data/testpersons",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"entity",
+								"api",
+								"data",
+								"testpersons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ABUSE_M with embedded records",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"console.info(`Son Name: ${pm.iterationData.get(\"ABUSE_M_CHILD4_FIRST_NAME\")}`);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"data\": {\r\n\t\t\"uniqueID\": \"{{ABUSE_M_CHILD4_UNIQUE_ID}}\",\r\n\t\t\"FirstName\": \"{{ABUSE_M_CHILD4_FIRST_NAME}}\",\r\n\t\t\"LastName\": \"{{LAST_NAME}}\",\r\n\t\t\"MiddleName\": \"{{TIMESTAMP}}{{ROW}}07\",\r\n\t\t\"DATEOFBIRTHAVAILABLE\": \"Yes\",\r\n\t\t\"DateofBirth\": \"{{ABUSE_M_CHILD4_BIRTH_DATE}}\",\r\n\t\t\"DOBVERIFIED\": \"Yes\",\r\n\t\t\"DATEAGEVERIFIED\": \"{{COMMON_START_DATE}}\",\r\n\t\t\"SEXATBIRTH\": \"Male\",\r\n\t\t\"Gender\": \"Male\",\r\n\t\t\"RACE\": \"{{RACE}}\",\r\n\t\t\"ETHNICITYMS\": \"{{ETHNICITY}}\",\r\n\t\t\"SOCIALSECURITYNUMBER\": \"{{ABUSE_M_CHILD4_SSN}}\",\r\n\t\t\"SSNVERIFY\": \"1\",\r\n\t\t\"CITIZENSHIPSTATUS\": \"{{CITIZENSHIP_STATUS}}\",\r\n\t\t\"MARITALSTATUS\": \"{{MARITAL_STATUS}}\",\r\n\t\t\"DATEMARRIED\": \"{{DATE_MARRIED}}\",\r\n\t\t\"PRIORVIC\": \"No\",\r\n\t\t\"ICWAELIGIBLE\": \"{{ICWAELIGIBLE}}\",\r\n\t\t\"TRIBALEVENTS\": \"{{TRIBALEVENTS}}\",\r\n\t\t\"TRIBALSERVICES\": \"{{TRIBALSERVICES}}\",\r\n\t\t\"TRIBALLAND\": \"{{TRIBALLAND}}\",\r\n\t\t\"MEMBEROFTRIBE\": \"{{MEMBEROFTRIBE}}\",\r\n\t\t\"INDIANCHILDUNDERICWA\": \"{{INDIANCHILDUNDERICWA}}\",\r\n\t\t\"TRIBALAFFILIATION\": \"{{TRIBALAFFILIATION}}\",\r\n\t\t\"ICWAAPPLIES\": \"{{ICWAAPPLIES}}\",\r\n\t\t\"testphonenumbers\": [\r\n\t\t\t{\r\n\t\t\t\t\"uniqueID\": \"PN-{{TIMESTAMP}}{{ROW}}07\",\r\n\t\t\t\t\"parentUniqueID\": \"{{ABUSE_M_CHILD4_UNIQUE_ID}}\",\r\n\t\t\t\t\"PHONETYPE\": \"{{ABUSE_M_CHILD4_PHONE_TYPE}}\",\r\n\t\t\t\t\"SUBTYPE\": \"Primary\",\r\n\t\t\t\t\"PHONENUMBER\": \"{{ABUSE_M_CHILD4_PHONE_NUMBER}}\",\r\n\t\t\t\t\"STARTDATE\": \"{{COMMON_START_DATE}}\"\r\n\t\t\t}\r\n\t\t],\r\n\t\t\"testemailaddresses\": [\r\n\t\t\t{\r\n\t\t\t\t\"uniqueID\": \"EA-{{TIMESTAMP}}{{ROW}}07\",\r\n\t\t\t\t\"parentUniqueID\": \"{{ABUSE_M_CHILD4_UNIQUE_ID}}\",\r\n\t\t\t\t\"EMAILTYPE\": \"{{ABUSE_M_CHILD4_EMAIL_TYPE}}\",\r\n\t\t\t\t\"EMAILADDRESS\": \"{{ABUSE_M_CHILD4_EMAIL}}\",\r\n\t\t\t\t\"STARTDATE\": \"{{COMMON_START_DATE}}\"\r\n\t\t\t}\r\n\t\t],\r\n\t\t\"testhealthcareprofessionals\": [\r\n\t\t\t{\r\n\t\t\t\t\"uniqueID\": \"HP-{{TIMESTAMP}}{{ROW}}07\",\r\n\t\t\t\t\"parentUniqueID\": \"{{ABUSE_M_CHILD4_UNIQUE_ID}}\",\r\n\t\t\t\t\"HEALTHCAREPROFESSIONALTYPE\": \"{{ABUSE_M_CHILD4_HEALTHCARE_PROFESSIONAL_TYPE}}\",\r\n\t\t\t\t\"HEALTHCAREPROFESSIONALNAME\": \"{{$randomFullName}}\",\r\n\t\t\t\t\"STARTDATE\": \"{{COMMON_START_DATE}}\"\r\n\t\t\t}\r\n\t\t],\r\n\t\t\"testmentalhealthprofessionals\": [\r\n\t\t\t{\r\n\t\t\t\t\"uniqueID\": \"MH-{{TIMESTAMP}}{{ROW}}07\",\r\n\t\t\t\t\"parentUniqueID\": \"{{ABUSE_M_CHILD4_UNIQUE_ID}}\",\r\n\t\t\t\t\"MENTALHEALTHPROFESSIONALTYPE\": \"{{ABUSE_M_CHILD4_MENTAL_HEALTH_PROFESSIONAL_TYPE}}\",\r\n\t\t\t\t\"MENTALHEALTHPROFESSIONALNAME\": \"{{$randomFullName}}\",\r\n\t\t\t\t\"STARTDATE\": \"{{COMMON_START_DATE}}\"\r\n\t\t\t}\r\n\t\t],\r\n\t\t\"testprimaryoptometrists\": [\r\n\t\t\t{\r\n\t\t\t\t\"uniqueID\": \"PO-{{TIMESTAMP}}{{ROW}}07\",\r\n\t\t\t\t\"parentUniqueID\": \"{{ABUSE_M_CHILD4_UNIQUE_ID}}\",\r\n\t\t\t\t\"OPTICALPROFTYPE\": \"{{ABUSE_M_CHILD4_PRIMARY_OPTOMETRIST_TYPE}}\",\r\n\t\t\t\t\"PRIMARYOPTOMETRISTNAME\": \"{{$randomFullName}}\",\r\n\t\t\t\t\"STARTDATE\": \"{{COMMON_START_DATE}}\"\r\n\t\t\t}\r\n\t\t],\r\n\t\t\"testprimarydentists\": [\r\n\t\t\t{\r\n\t\t\t\t\"uniqueID\": \"PD-{{TIMESTAMP}}{{ROW}}07\",\r\n\t\t\t\t\"parentUniqueID\": \"{{ABUSE_M_CHILD4_UNIQUE_ID}}\",\r\n\t\t\t\t\"DENTALPROFESSIONALTYPE\": \"{{ABUSE_M_CHILD4_PRIMARY_DENTIST_TYPE}}\",\r\n\t\t\t\t\"PRIMARYDENTISTNAME\": \"{{$randomFullName}}\",\r\n\t\t\t\t\"STARTDATE\": \"{{COMMON_START_DATE}}\"\r\n\t\t\t}\r\n\t\t]\r\n\t}\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/entity/api/data/testpersons",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"entity",
+								"api",
+								"data",
+								"testpersons"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Addresses",
+			"item": [
+				{
+					"name": "Address DAD",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.info(`Creating Addresses for household: ${pm.iterationData.get(\"LAST_NAME\")}`);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"data\": {\r\n        \"uniqueID\": \"A-{{TIMESTAMP}}{{ROW}}01\",\r\n        \"parentUniqueID\": \"{{DAD_UNIQUE_ID}}\",\r\n        \"parentEntity\": \"testpersons\",\r\n        \"ADDRESSTYPE\": \"Living Address\",\r\n        \"ADDRESS\": \"{{ADDRESS_GRP_1}}\",\r\n        \"COUNTY\": \"{{ADDRESS_COUNTY_01}}\",\r\n        \"STARTDATE\": \"{{COMMON_START_DATE}}\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/entity/api/data/testaddress",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"entity",
+								"api",
+								"data",
+								"testaddress"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Address MOM",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"data\": {\r\n\t\t\"uniqueID\": \"A-{{TIMESTAMP}}{{ROW}}02\",\r\n\t\t\"parentUniqueID\": \"{{MOM_UNIQUE_ID}}\",\r\n\t\t\"parentEntity\": \"testpersons\",\r\n\t\t\"ADDRESSTYPE\": \"Living Address\",\r\n\t\t\"ADDRESS\": \"{{ADDRESS_GRP_2}}\",\r\n\t\t\"COUNTY\": \"{{ADDRESS_COUNTY_02}}\",\r\n\t\t\"STARTDATE\": \"{{COMMON_START_DATE}}\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/entity/api/data/testaddress",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"entity",
+								"api",
+								"data",
+								"testaddress"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Address GRAND MOM",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"data\": {\r\n\t\t\"uniqueID\": \"A-{{TIMESTAMP}}{{ROW}}03\",\r\n\t\t\"parentUniqueID\": \"{{GRAND_MOM_UNIQUE_ID}}\",\r\n\t\t\"parentEntity\": \"testpersons\",\r\n\t\t\"ADDRESSTYPE\": \"Living Address\",\r\n\t\t\"ADDRESS\": \"{{ADDRESS_GRP_3}}\",\r\n\t\t\"COUNTY\": \"{{ADDRESS_COUNTY_03}}\",\r\n\t\t\"STARTDATE\": \"{{COMMON_START_DATE}}\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/entity/api/data/testaddress",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"entity",
+								"api",
+								"data",
+								"testaddress"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Address NEGLECT_F_CHILD1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"data\": {\r\n\t\t\"uniqueID\": \"A-{{TIMESTAMP}}{{ROW}}04\",\r\n\t\t\"parentUniqueID\": \"{{NEGLECT_F_CHILD1_UNIQUE_ID}}\",\r\n\t\t\"parentEntity\": \"testpersons\",\r\n\t\t\"ADDRESSTYPE\": \"Living Address\",\r\n\t\t\"ADDRESS\": \"{{ADDRESS_GRP_3}}\",\r\n\t\t\"COUNTY\": \"{{ADDRESS_COUNTY_03}}\",\r\n\t\t\"STARTDATE\": \"{{COMMON_START_DATE}}\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/entity/api/data/testaddress",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"entity",
+								"api",
+								"data",
+								"testaddress"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Address ABUSE_F_CHILD2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"data\": {\r\n\t\t\"uniqueID\": \"A-{{TIMESTAMP}}{{ROW}}05\",\r\n\t\t\"parentUniqueID\": \"{{ABUSE_F_CHILD2_UNIQUE_ID}}\",\r\n\t\t\"parentEntity\": \"testpersons\",\r\n\t\t\"ADDRESSTYPE\": \"Living Address\",\r\n\t\t\"ADDRESS\": \"{{ADDRESS_GRP_1}}\",\r\n\t\t\"COUNTY\": \"{{ADDRESS_COUNTY_01}}\",\r\n\t\t\"STARTDATE\": \"{{COMMON_START_DATE}}\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/entity/api/data/testaddress",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"entity",
+								"api",
+								"data",
+								"testaddress"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Address NEGLECT_M_CHILD3",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"data\": {\r\n\t\t\"uniqueID\": \"A-{{TIMESTAMP}}{{ROW}}06\",\r\n\t\t\"parentUniqueID\": \"{{NEGLECT_M_CHILD3_UNIQUE_ID}}\",\r\n\t\t\"parentEntity\": \"testpersons\",\r\n\t\t\"ADDRESSTYPE\": \"Living Address\",\r\n\t\t\"ADDRESS\": \"{{ADDRESS_GRP_2}}\",\r\n\t\t\"COUNTY\": \"{{ADDRESS_COUNTY_02}}\",\r\n\t\t\"STARTDATE\": \"{{COMMON_START_DATE}}\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/entity/api/data/testaddress",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"entity",
+								"api",
+								"data",
+								"testaddress"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Address ABUSE_M_CHILD4",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"data\": {\r\n\t\t\"uniqueID\": \"A-{{TIMESTAMP}}{{ROW}}07\",\r\n\t\t\"parentUniqueID\": \"{{ABUSE_M_CHILD4_UNIQUE_ID}}\",\r\n\t\t\"parentEntity\": \"testpersons\",\r\n\t\t\"ADDRESSTYPE\": \"Living Address\",\r\n\t\t\"ADDRESS\": \"{{ADDRESS_GRP_2}}\",\r\n\t\t\"COUNTY\": \"{{ADDRESS_COUNTY_02}}\",\r\n\t\t\"STARTDATE\": \"{{COMMON_START_DATE}}\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/entity/api/data/testaddress",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"entity",
+								"api",
+								"data",
+								"testaddress"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Relationships",
+			"item": [
+				{
+					"name": "Relationship_Dad-Mom",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.info(`Creating Relationships for household: ${pm.iterationData.get(\"LAST_NAME\")}`);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"data\": {\r\n\t\t\"uniqueID\": \"R-{{TIMESTAMP}}{{ROW}}11\",\r\n\t\t\"parentUniqueID\": \"{{DAD_UNIQUE_ID}}\",\r\n\t\t\"parentEntity\": \"testpersons\",\r\n\t\t\"RelatedPerson\": \"{{MOM_UNIQUE_ID}}\",\r\n\t\t\"RelationshipType\": \"Spouse(Ex)\",\r\n\t\t\"STARTDATE\": \"{{NEGLECT_F_CHILD1_BIRTH_DATE}}\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/entity/api/data/testrelationships",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"entity",
+								"api",
+								"data",
+								"testrelationships"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Relationship_Dad-Grand mom",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"data\": {\r\n\t\t\"uniqueID\": \"R-{{TIMESTAMP}}{{ROW}}12\",\r\n\t\t\"parentUniqueID\": \"{{DAD_UNIQUE_ID}}\",\r\n\t\t\"parentEntity\": \"testpersons\",\r\n\t\t\"RelatedPerson\": \"{{GRAND_MOM_UNIQUE_ID}}\",\r\n\t\t\"RelationshipType\": \"Mother (Biological)\",\r\n\t\t\"STARTDATE\": \"{{DAD_BIRTH_DATE}}\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/entity/api/data/testrelationships",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"entity",
+								"api",
+								"data",
+								"testrelationships"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Relationship_Dad-NEGLECT_F_CHILD1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"data\": {\r\n\t\t\"uniqueID\": \"R-{{TIMESTAMP}}{{ROW}}13\",\r\n\t\t\"parentUniqueID\": \"{{DAD_UNIQUE_ID}}\",\r\n\t\t\"parentEntity\": \"testpersons\",\r\n\t\t\"RelatedPerson\": \"{{NEGLECT_F_CHILD1_UNIQUE_ID}}\",\r\n\t\t\"RelationshipType\": \"Child (Biological)\",\r\n\t\t\"STARTDATE\": \"{{NEGLECT_F_CHILD1_BIRTH_DATE}}\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/entity/api/data/testrelationships",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"entity",
+								"api",
+								"data",
+								"testrelationships"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Relationship_Mom-NEGLECT_F_CHILD1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"data\": {\r\n\t\t\"uniqueID\": \"R-{{TIMESTAMP}}{{ROW}}14\",\r\n\t\t\"parentUniqueID\": \"{{MOM_UNIQUE_ID}}\",\r\n\t\t\"parentEntity\": \"testpersons\",\r\n\t\t\"RelatedPerson\": \"{{NEGLECT_F_CHILD1_UNIQUE_ID}}\",\r\n\t\t\"RelationshipType\": \"Child (Biological)\",\r\n\t\t\"STARTDATE\": \"{{NEGLECT_F_CHILD1_BIRTH_DATE}}\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/entity/api/data/testrelationships",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"entity",
+								"api",
+								"data",
+								"testrelationships"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Relationship_Grand Mom-NEGLECT_F_CHILD1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"data\": {\r\n\t\t\"uniqueID\": \"R-{{TIMESTAMP}}{{ROW}}15\",\r\n\t\t\"parentUniqueID\": \"{{GRAND_MOM_UNIQUE_ID}}\",\r\n\t\t\"parentEntity\": \"testpersons\",\r\n\t\t\"RelatedPerson\": \"{{NEGLECT_F_CHILD1_UNIQUE_ID}}\",\r\n\t\t\"RelationshipType\": \"Grandchild\",\r\n\t\t\"STARTDATE\": \"{{NEGLECT_F_CHILD1_BIRTH_DATE}}\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/entity/api/data/testrelationships",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"entity",
+								"api",
+								"data",
+								"testrelationships"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Relationship_Dad-ABUSE_F_CHILD2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"data\": {\r\n\t\t\"uniqueID\": \"R-{{TIMESTAMP}}{{ROW}}16\",\r\n\t\t\"parentUniqueID\": \"{{DAD_UNIQUE_ID}}\",\r\n\t\t\"parentEntity\": \"testpersons\",\r\n\t\t\"RelatedPerson\": \"{{ABUSE_F_CHILD2_UNIQUE_ID}}\",\r\n\t\t\"RelationshipType\": \"Child (Biological)\",\r\n\t\t\"STARTDATE\": \"{{ABUSE_F_CHILD2_BIRTH_DATE}}\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/entity/api/data/testrelationships",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"entity",
+								"api",
+								"data",
+								"testrelationships"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Relationship_Mom-ABUSE_F_CHILD2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"data\": {\r\n\t\t\"uniqueID\": \"R-{{TIMESTAMP}}{{ROW}}17\",\r\n\t\t\"parentUniqueID\": \"{{MOM_UNIQUE_ID}}\",\r\n\t\t\"parentEntity\": \"testpersons\",\r\n\t\t\"RelatedPerson\": \"{{ABUSE_F_CHILD2_UNIQUE_ID}}\",\r\n\t\t\"RelationshipType\": \"Child (Biological)\",\r\n\t\t\"STARTDATE\": \"{{ABUSE_F_CHILD2_BIRTH_DATE}}\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/entity/api/data/testrelationships",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"entity",
+								"api",
+								"data",
+								"testrelationships"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Relationship_Grand Mom-ABUSE_F_CHILD2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"data\": {\r\n\t\t\"uniqueID\": \"R-{{TIMESTAMP}}{{ROW}}18\",\r\n\t\t\"parentUniqueID\": \"{{GRAND_MOM_UNIQUE_ID}}\",\r\n\t\t\"parentEntity\": \"testpersons\",\r\n\t\t\"RelatedPerson\": \"{{ABUSE_F_CHILD2_UNIQUE_ID}}\",\r\n\t\t\"RelationshipType\": \"Grandchild\",\r\n\t\t\"STARTDATE\": \"{{ABUSE_F_CHILD2_BIRTH_DATE}}\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/entity/api/data/testrelationships",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"entity",
+								"api",
+								"data",
+								"testrelationships"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Relationship_Dad- NEGLECT_M_CHILD3",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"data\": {\r\n\t\t\"uniqueID\": \"R-{{TIMESTAMP}}{{ROW}}19\",\r\n\t\t\"parentUniqueID\": \"{{DAD_UNIQUE_ID}}\",\r\n\t\t\"parentEntity\": \"testpersons\",\r\n\t\t\"RelatedPerson\": \"{{NEGLECT_M_CHILD3_UNIQUE_ID}}\",\r\n\t\t\"RelationshipType\": \"Child (Biological)\",\r\n\t\t\"STARTDATE\": \"{{NEGLECT_M_CHILD3_BIRTH_DATE}}\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/entity/api/data/testrelationships",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"entity",
+								"api",
+								"data",
+								"testrelationships"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Relationship_Mom- NEGLECT_M_CHILD3",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"data\": {\r\n\t\t\"uniqueID\": \"R-{{TIMESTAMP}}{{ROW}}20\",\r\n\t\t\"parentUniqueID\": \"{{MOM_UNIQUE_ID}}\",\r\n\t\t\"parentEntity\": \"testpersons\",\r\n\t\t\"RelatedPerson\": \"{{NEGLECT_M_CHILD3_UNIQUE_ID}}\",\r\n\t\t\"RelationshipType\": \"Child (Biological)\",\r\n\t\t\"STARTDATE\": \"{{NEGLECT_M_CHILD3_BIRTH_DATE}}\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/entity/api/data/testrelationships",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"entity",
+								"api",
+								"data",
+								"testrelationships"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Relationship_Grand Mom- NEGLECT_M_CHILD3",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"data\": {\r\n\t\t\"uniqueID\": \"R-{{TIMESTAMP}}{{ROW}}21\",\r\n\t\t\"parentUniqueID\": \"{{GRAND_MOM_UNIQUE_ID}}\",\r\n\t\t\"parentEntity\": \"testpersons\",\r\n\t\t\"RelatedPerson\": \"{{NEGLECT_M_CHILD3_UNIQUE_ID}}\",\r\n\t\t\"RelationshipType\": \"Grandchild\",\r\n\t\t\"STARTDATE\": \"{{NEGLECT_M_CHILD3_BIRTH_DATE}}\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/entity/api/data/testrelationships",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"entity",
+								"api",
+								"data",
+								"testrelationships"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Relationship_Dad- ABUSE_M_CHILD4",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"data\": {\r\n\t\t\"uniqueID\": \"R-{{TIMESTAMP}}{{ROW}}22\",\r\n\t\t\"parentUniqueID\": \"{{DAD_UNIQUE_ID}}\",\r\n\t\t\"parentEntity\": \"testpersons\",\r\n\t\t\"RelatedPerson\": \"{{ABUSE_M_CHILD4_UNIQUE_ID}}\",\r\n\t\t\"RelationshipType\": \"Child (Biological)\",\r\n\t\t\"STARTDATE\": \"{{ABUSE_M_CHILD4_BIRTH_DATE}}\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/entity/api/data/testrelationships",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"entity",
+								"api",
+								"data",
+								"testrelationships"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Relationship_Mom- ABUSE_M_CHILD4",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"data\": {\r\n\t\t\"uniqueID\": \"R-{{TIMESTAMP}}{{ROW}}23\",\r\n\t\t\"parentUniqueID\": \"{{MOM_UNIQUE_ID}}\",\r\n\t\t\"parentEntity\": \"testpersons\",\r\n\t\t\"RelatedPerson\": \"{{ABUSE_M_CHILD4_UNIQUE_ID}}\",\r\n\t\t\"RelationshipType\": \"Child (Biological)\",\r\n\t\t\"STARTDATE\": \"{{ABUSE_M_CHILD4_BIRTH_DATE}}\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/entity/api/data/testrelationships",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"entity",
+								"api",
+								"data",
+								"testrelationships"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Relationship_Grand Mom- ABUSE_M_CHILD4",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"data\": {\r\n\t\t\"uniqueID\": \"R-{{TIMESTAMP}}{{ROW}}24\",\r\n\t\t\"parentUniqueID\": \"{{GRAND_MOM_UNIQUE_ID}}\",\r\n\t\t\"parentEntity\": \"testpersons\",\r\n\t\t\"RelatedPerson\": \"{{ABUSE_M_CHILD4_UNIQUE_ID}}\",\r\n\t\t\"RelationshipType\": \"Grandchild\",\r\n\t\t\"STARTDATE\": \"{{ABUSE_M_CHILD4_BIRTH_DATE}}\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/entity/api/data/testrelationships",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"entity",
+								"api",
+								"data",
+								"testrelationships"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Relationship_Child 01-Child 02",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"data\": {\r\n\t\t\"uniqueID\": \"R-{{TIMESTAMP}}{{ROW}}25\",\r\n\t\t\"parentUniqueID\": \"{{NEGLECT_F_CHILD1_UNIQUE_ID}}\",\r\n\t\t\"parentEntity\": \"testpersons\",\r\n\t\t\"RelatedPerson\": \"{{ABUSE_F_CHILD2_UNIQUE_ID}}\",\r\n\t\t\"RelationshipType\": \"Sibling (Biological)\",\r\n\t\t\"STARTDATE\": \"{{ABUSE_F_CHILD2_BIRTH_DATE}}\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/entity/api/data/testrelationships",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"entity",
+								"api",
+								"data",
+								"testrelationships"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Relationship_child 01 - child 03",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"data\": {\r\n\t\t\"uniqueID\": \"R-{{TIMESTAMP}}{{ROW}}26\",\r\n\t\t\"parentUniqueID\": \"{{NEGLECT_F_CHILD1_UNIQUE_ID}}\",\r\n\t\t\"parentEntity\": \"testpersons\",\r\n\t\t\"RelatedPerson\": \"{{NEGLECT_M_CHILD3_UNIQUE_ID}}\",\r\n\t\t\"RelationshipType\": \"Sibling (Biological)\",\r\n\t\t\"STARTDATE\": \"{{NEGLECT_M_CHILD3_BIRTH_DATE}}\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/entity/api/data/testrelationships",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"entity",
+								"api",
+								"data",
+								"testrelationships"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Relationship_child01-child04",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"data\": {\r\n\t\t\"uniqueID\": \"R-{{TIMESTAMP}}{{ROW}}27\",\r\n\t\t\"parentUniqueID\": \"{{NEGLECT_F_CHILD1_UNIQUE_ID}}\",\r\n\t\t\"parentEntity\": \"testpersons\",\r\n\t\t\"RelatedPerson\": \"{{ABUSE_M_CHILD4_UNIQUE_ID}}\",\r\n\t\t\"RelationshipType\": \"Sibling (Biological)\",\r\n\t\t\"STARTDATE\": \"{{ABUSE_M_CHILD4_BIRTH_DATE}}\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/entity/api/data/testrelationships",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"entity",
+								"api",
+								"data",
+								"testrelationships"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Relationship_child 02 - child 03",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"data\": {\r\n\t\t\"uniqueID\": \"R-{{TIMESTAMP}}{{ROW}}28\",\r\n\t\t\"parentUniqueID\": \"{{ABUSE_F_CHILD2_UNIQUE_ID}}\",\r\n\t\t\"parentEntity\": \"testpersons\",\r\n\t\t\"RelatedPerson\": \"{{NEGLECT_M_CHILD3_UNIQUE_ID}}\",\r\n\t\t\"RelationshipType\": \"Sibling (Biological)\",\r\n\t\t\"STARTDATE\": \"{{NEGLECT_M_CHILD3_BIRTH_DATE}}\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/entity/api/data/testrelationships",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"entity",
+								"api",
+								"data",
+								"testrelationships"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Relationship_child02-child04",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"data\": {\r\n\t\t\"uniqueID\": \"R-{{TIMESTAMP}}{{ROW}}29\",\r\n\t\t\"parentUniqueID\": \"{{ABUSE_F_CHILD2_UNIQUE_ID}}\",\r\n\t\t\"parentEntity\": \"testpersons\",\r\n\t\t\"RelatedPerson\": \"{{ABUSE_M_CHILD4_UNIQUE_ID}}\",\r\n\t\t\"RelationshipType\": \"Sibling (Biological)\",\r\n\t\t\"STARTDATE\": \"{{ABUSE_M_CHILD4_BIRTH_DATE}}\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/entity/api/data/testrelationships",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"entity",
+								"api",
+								"data",
+								"testrelationships"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Relationship_child03-child04",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"data\": {\r\n\t\t\"uniqueID\": \"R-{{TIMESTAMP}}{{ROW}}30\",\r\n\t\t\"parentUniqueID\": \"{{NEGLECT_M_CHILD3_UNIQUE_ID}}\",\r\n\t\t\"parentEntity\": \"testpersons\",\r\n\t\t\"RelatedPerson\": \"{{ABUSE_M_CHILD4_UNIQUE_ID}}\",\r\n\t\t\"RelationshipType\": \"Sibling (Biological)\",\r\n\t\t\"STARTDATE\": \"{{ABUSE_M_CHILD4_BIRTH_DATE}}\"\r\n\t}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/entity/api/data/testrelationships",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"entity",
+								"api",
+								"data",
+								"testrelationships"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "{{password}}",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "{{username}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
